@@ -1,35 +1,55 @@
 <template>
  <h1>{{title}}</h1>
- 
+ <p>Welcome...</p>
+<teleport to=".modals" v-if="showModal">
+  <Modal  theme="sale" @close="changeModal">
+      <h1>OpenCode Giveaway !</h1>
+      <p>Grab the course for half price</p>
+      <template v-slot:links>
+        <a href="#">Sign up</a>
+        <a href="#">more info</a>
+      </template>
+    </Modal>
+</teleport>
 
- <Modal />
+<teleport to=".modals" v-if="showModalTwo">
+  <Modal  theme="sale" @close="changeModalTwo">
+      <h1>Sign up for news !</h1>
+      <p>Dont lose any</p>
+      
+    </Modal>
+</teleport>
+
+<button @click="changeModal">show Modal</button>
+<button @click="changeModalTwo">show Modal Two</button>
 </template>
 
 <script>
 import Modal from './components/Modal.vue'
 
-
-
 export default {
   name: 'App',
-  components: {Modal},
+  components: { Modal },
  data(){
   return{
-    title: 'test for webpage'
+    title: 'My vue APP',
+    showModal: false,
+    showModalTwo:false,
   }
  },
  methods: {
-  handleEvent(){
-    console.log('test');
-    console.log(this.$refs.name);
-    this.$refs.name.classList.add('test')
+  changeModal(){
+    this.showModal= !this.showModal
+  },
+  changeModalTwo(){
+    this.showModalTwo= !this.showModalTwo
   }
  }
 }
 </script>
 
 <style>
-#app {
+#app, .modals {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
